@@ -28,6 +28,7 @@ const rootReducer = (state = defaultState, action) => {
                     usedCards:[]
                 }            
             };
+            
         case 'DEAL_DECK': {          
             let coveredCards = state.mainDeck.coveredCards;
             let piles = [[],[],[],[],[],[],[]];
@@ -48,12 +49,11 @@ const rootReducer = (state = defaultState, action) => {
                     usedCards:[]
                 }
             };
-        }
-        case 'REAVEAL_THREE_CARDS':{
-            let coveredCards = state.mainDeck.coveredCards;
-            let visibleCards = state.mainDeck.visibleCards;
-            let usedCards = state.mainDeck.usedCards;
-            console.log(coveredCards.length);
+        }        
+        case 'REAVEAL_THREE_CARDS':{            
+            let coveredCards = state.mainDeck.coveredCards.map((card) => card);
+            let visibleCards = state.mainDeck.visibleCards.map((card) => card);
+            let usedCards = state.mainDeck.usedCards.map((card) => card);            
             if (coveredCards.length===0){
                 let length = usedCards.length;
                 for (let i =0 ;i<length; i++){
@@ -75,17 +75,18 @@ const rootReducer = (state = defaultState, action) => {
             for (let i = 0; i<3 && coveredCards.length>0; i++){
                 let card = coveredCards.pop();
                 visibleCards.push(card);
-            }
-            return{
+            }           
+            return {
                 ...state,
-                mainDeck:{
+                mainDeck:{                    
                     coveredCards,
                     visibleCards,
                     usedCards
-                }
+                }   
 
             };
         }
+            
         default:
             return state;
     } 

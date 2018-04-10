@@ -7,7 +7,9 @@ import Pile5 from './piles/Pile5';
 import Pile6 from './piles/Pile6';
 import Pile7 from './piles/Pile7';
 
-const Piles = () => {
+
+const Piles = (props) => {
+    
     return (
         <div className="piles">
             <h2>Piles</h2>
@@ -17,7 +19,7 @@ const Piles = () => {
             <Pile4 />
             <Pile5 />
             <Pile6 />
-            <Pile7 />
+            <Pile7 />            
         </div>
     )
 }

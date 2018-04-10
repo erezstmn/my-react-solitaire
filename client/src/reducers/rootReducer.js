@@ -75,7 +75,8 @@ const rootReducer = (state = defaultState, action) => {
             for (let i = 0; i<3 && coveredCards.length>0; i++){
                 let card = coveredCards.pop();
                 visibleCards.push(card);
-            }           
+            }
+            visibleCards[2].isAccessible = true;           
             return {
                 ...state,
                 mainDeck:{                    

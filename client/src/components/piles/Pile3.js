@@ -7,8 +7,11 @@ const Pile3 = (props) =>{
         <div className="pile3">
             <h5>Pile3</h5>
             {props.Pile3.map((card) => {
+                if (props.Pile3.indexOf(card) === props.Pile3.length -1 ){
+                    card.isVisible = true;
+                }
                 return (
-                    <li key={card.suit + card.rank}>{card.suit + card.rank}</li>
+                    <li key={card.suit + card.rank}>{card.isVisible?card.suit + card.rank:'card'}</li>
                 );
             })}
             

@@ -8,17 +8,19 @@ const MainDeck = (props) => {
                 <h2>MainDeck</h2>           
                 {props.coveredCards.map((card) => {
                     return (
-                        <li key={card.suit + card.rank}>{card.suit + card.rank}</li>
+                        <li key={card.suit + card.rank}>{card.isVisible?card.suit + card.rank:'card'}</li>
                     )})}            
-                <p>visibleCards</p>
+                <p>visibleCards</p>               
                 {props.visibleCards.map((card) => {
+                    card.isVisible=true;
                     return (
-                    <li key={card.suit + card.rank}>{card.suit + card.rank}</li>
-                    )})}
+                        <li key={card.suit + card.rank}>{card.isVisible?card.suit + card.rank:'card'}</li>                   
+                    )})}               
                 <p>usedCards</p>
                 {props.usedCards.map((card) => {
+                    card.isVisible=false;
                     return (
-                        <li key={card.suit + card.rank}>{card.suit + card.rank}</li>
+                        <li key={card.suit + card.rank}>{card.isVisible?card.suit + card.rank:'card'}</li>
                     )
                 })}
                 

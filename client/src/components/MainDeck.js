@@ -1,11 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import '../App.css';
 
-const MainDeck = (props) => {     
-    console.log('test');
-    return(
-            <div>
-                <p>MainDeck</p>           
+const MainDeck = (props) => { 
+      return(
+            <div className="main_deck">
+                <h2>MainDeck</h2>           
                 {props.coveredCards.map((card) => {
                     return (
                         <li key={card.suit + card.rank}>{card.suit + card.rank}</li>

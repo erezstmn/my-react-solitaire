@@ -5,6 +5,7 @@ import {Provider} from 'react-redux';
 import configureStore from './store/configureStore';
 import MainDeck from './components/MainDeck';
 import Foundations from './components/Foundations';
+import Piles from './components/Piles';
 
 
 const store = configureStore();
@@ -30,6 +31,7 @@ class App extends Component {
         <button onClick={this.handleRevealCards}>Show 3 cards</button>
         <MainDeck/>
         <Foundations />
+        <Piles />
         <p></p>
       </div>
       </Provider>

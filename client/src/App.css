@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  
 }
 
 .App-logo {
@@ -25,4 +26,77 @@
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+.main_deck {
+  position: fixed;
+  top:10%;
+  left: 10%;
+  height: 30%;
+
+}
+
+.foundations {
+  position: fixed;
+  top: 5%;
+  right: 10%;
+  width: 60%;
+  height: 30%;
+}
+.spades {
+  position: absolute;
+  top: 15%;
+  left: 80%;
+}
+
+.hearts {
+  position: absolute;
+  top: 15%;
+  left: 20%;
+}
+
+.clubs {
+  position: absolute;
+  top: 15%;
+  left: 40%;
+}
+
+.diamonds {
+  position: absolute;
+  top: 15%;
+  left: 60%;
+}
+.piles {
+  position: fixed;
+  top: 60%;
+  width: 100%;
+  height: 30%;
+}
+
+.pile1 {
+  position: absolute;
+  left: 12.5%;
+}
+.pile2 {
+  position: absolute;
+  left: 25%;
+}
+.pile3 {
+  position: absolute;
+  left: 37.5%;
+}
+.pile4 {
+  position: absolute;
+  left: 50%;
+}
+.pile5 {
+  position: absolute;
+  left: 62.5%;
+}
+.pile6 {
+  position: absolute;
+  left: 75%;
+}
+.pile7 {
+  position: absolute;
+  left: 87.5%;
 }

@@ -103,8 +103,8 @@ const rootReducer = (state = defaultState, action) => {
             }
             foundations[action.foundationSuit].push(action.card);
             if (action.card.parentPile==='visibleCards'){
-                
                 visibleCards.pop();
+                visibleCards[visibleCards.length-1].isAccessible = true;
             }else{                
                 let pileNumber = parseInt(action.card.parentPile.slice(-1),10);  
                 piles[pileNumber-1].pop();  

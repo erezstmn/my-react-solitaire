@@ -26,8 +26,8 @@ class Pile extends Component {
                             isAccessible={card.isAccessible}
                             parentPile={pileName}
                             />
-                    );
-                })}            
+                        );
+                     })}            
             </div>
         );
     };
@@ -39,7 +39,6 @@ const mapStateToProps = (state) => {
         Piles: state.piles
     }
 }
-
 const spec = {
     canDrop(props, monitor){
         return true;
@@ -60,8 +59,7 @@ const collect = (connect, monitor) =>{
         connectDropTarget: connect.dropTarget(),
         isOver: monitor.isOver(),
         item:monitor.getItem(),
-        didDrop: monitor.didDrop(),
-
+        didDrop: monitor.didDrop()
 
     }
 };

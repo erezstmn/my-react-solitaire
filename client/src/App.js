@@ -22,7 +22,7 @@ class App extends Component {
       <Provider store={store}>
       <div className="App">
         <Table />
-        <button onClick={this.handleClick}>hit me</button>
+        <button onClick={this.handleClick}>New Game</button>
         <button onClick={this.handleRevealCards}>Show 3 cards</button>      
       </div>
       </Provider>

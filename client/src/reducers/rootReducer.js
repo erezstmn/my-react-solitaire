@@ -76,7 +76,7 @@ const rootReducer = (state = defaultState, action) => {
                 let card = coveredCards.pop();
                 visibleCards.push(card);
             }
-            visibleCards[2].isAccessible = true;           
+            visibleCards[visibleCards.length-1].isAccessible = true;           
             return {
                 ...state,
                 mainDeck:{                    
@@ -87,7 +87,43 @@ const rootReducer = (state = defaultState, action) => {
 
             };
         }
+        case 'ADD_CARD_TO_FOUNDATION':{
+            let piles = state.piles.map((pile) => pile);
+            let coveredCards = state.mainDeck.coveredCards.map((card) => card);
+            let visibleCards = state.mainDeck.visibleCards.map((card) => card);
+            let usedCards = state.mainDeck.usedCards.map((card) => card); 
+            let foundations = {
+                clubs : state.foundations.clubs.map((card) => card),
+                diamonds : state.foundations.diamonds.map((card) => card),
+                hearts : state.foundations.hearts.map((card) => card),
+                spades : state.foundations.spades.map((card) => card)
+            } 
+             if (action.card.suit!==action.foundationSuit  || action.card.rank-1 !==foundations[action.foundationSuit].length){
+                    return state;
+            }
+            foundations[action.foundationSuit].push(action.card);
+            if (action.card.parentPile==='visibleCards'){
+                
+                visibleCards.pop();
+            }else{                
+                let pileNumber = parseInt(action.card.parentPile.slice(-1),10);  
+                piles[pileNumber-1].pop();  
+            }      
+            return {
+                ...state,
+                piles,
+                foundations, 
+                mainDeck:{
+                    coveredCards,
+                    visibleCards,
+                    usedCards
+                }   
+            }
+        }
+        case 'ADD_CARD_TO_PILE':{
             
+            return state;
+        }
         default:
             return state;
     } 

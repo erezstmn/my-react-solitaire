@@ -12,7 +12,7 @@ class Table extends Component {
         return(
             <div className="table">Table
                 <Foundations />
-                <Piles />
+                    <Piles />
                 <MainDeck />               
             </div>
         );

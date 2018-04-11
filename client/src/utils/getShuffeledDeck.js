@@ -15,7 +15,7 @@ const shuffleDeck = (deck) => {
 }
 const getShuffeledDeck = ()  =>  {
     let deck =[];
-    const suits = ["clubs ","diamonds", "hearts", "spades"];
+    const suits = ["clubs","diamonds", "hearts", "spades"];
     for (let i = 0 ; i < 4; i++){
         for (let j = 1 ; j < 14 ; j++){
             let card = new Card(suits[i],j);

@@ -9,17 +9,30 @@ import {addCardToPile} from '../actions/actionsCreators'
 
 class Pile extends Component {       
         render(){
-            let pileName ="pile"+(parseInt(this.props.pileIndex,10)+1);   
+            let pileName ="pile"+(parseInt(this.props.pileIndex,10)+1);
+            const fieldSetDimensions = {
+                width:'60px',
+                height:'120px'
+            }
         return this.props.connectDropTarget(        
-            <div className={pileName}>            
-                    <h5>Pile</h5>           
-                {this.props.Piles[this.props.pileIndex].map((card) => {
+            <div className={pileName}>
+                <fieldset style={fieldSetDimensions}/>
+                {this.props.Piles[this.props.pileIndex].map((card, index) => {
                     if (this.props.Piles[this.props.pileIndex].indexOf(card) === this.props.Piles[this.props.pileIndex].length -1 ){
                         card.isVisible = true;
                         card.isAccessible= true;
                     }
+                    let cardHeight = 10 * index;
+                    cardHeight +='px';
+                    let cardStyle ={
+                        position:'absolute',
+                        top:cardHeight,
+                        left:'-1px'
+                        
+                    }
                     return (                    
-                        <Card 
+                        <Card
+                            style={cardStyle} 
                             key={card.suit + card.rank} 
                             rank={card.rank} suit={card.suit} 
                             isVisible={card.isVisible}
@@ -47,10 +60,9 @@ const spec = {
 
     },
     drop(props, monitor, component) {       
-        console.log('test');
-        component.store.dispatch(addCardToPile(monitor.getItem(),props.name));
+        component.store.dispatch(addCardToPile(monitor.getItem(),component.props.pileIndex));
         return {
-            foundation: props.name
+            
         }
     }
 };

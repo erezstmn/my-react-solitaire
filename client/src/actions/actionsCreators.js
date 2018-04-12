@@ -21,9 +21,11 @@ export const addCardToFoundation = (card, foundationSuit) => {
     };
 }
 
-export const addCardToPile = (card) => {
+export const addCardToPile = (card, pileIndex) => {
     return{
-        type: 'ADD_CARD_TO_PILE'
+        type: 'ADD_CARD_TO_PILE',
+        card,
+        pileIndex
     };
 }
 

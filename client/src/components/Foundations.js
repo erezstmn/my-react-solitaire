@@ -3,8 +3,7 @@ import Foundation from './Foundation';
 import '../App.css';
 
 const Foundations  = () =>(
-    <div className="foundations">
-        <h3>Foundations</h3>        
+    <div className="foundations">          
         <Foundation name="hearts"/>
         <Foundation name="clubs"/>
         <Foundation name="diamonds"/>

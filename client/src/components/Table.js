@@ -9,10 +9,11 @@ import HTML5Backend from 'react-dnd-html5-backend';
 class Table extends Component {
 
     render() {
+       
         return(
             <div className="table">Table
                 <Foundations />
-                    <Piles />
+                <Piles />
                 <MainDeck />               
             </div>
         );

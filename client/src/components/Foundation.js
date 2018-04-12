@@ -7,10 +7,16 @@ import '../App.css';
 import {addCardToFoundation} from '../actions/actionsCreators';
 
 class Foundation extends Component {   
+    
     render(){
+        const fieldSetDimensions = {
+            width:'60px',
+            height:'120px'
+
+        }
         return this.props.connectDropTarget(
             <div className={this.props.name}>
-                <h4>{this.props.name}</h4>                
+                <fieldset style={fieldSetDimensions}>{this.props.name}</fieldset>                
                 {this.props.foundations[this.props.name].map((card) => {
                     return (
                         <Card key={card.suit + card.rank} 

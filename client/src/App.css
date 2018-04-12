@@ -4,6 +4,7 @@
 }
 .main_deck {
   position: absolute;
+  text-align: left;
   top:10%;
   left: 10%;
   height: 30%;
@@ -77,3 +78,4 @@
 .green {
   background-color: green;
 }
+

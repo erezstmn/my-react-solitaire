@@ -57,14 +57,27 @@ const rootReducer = (state = defaultState, action) => {
             if (coveredCards.length===0){
                 let length = usedCards.length;
                 for (let i =0 ;i<length; i++){
-                    let card = usedCards.pop();
+                    let card = usedCards.shift();
                     coveredCards.push(card);
                 }
                 length = visibleCards.length;
                 for (let i =0 ;i<length; i++){
-                    let card = visibleCards.pop();
+                    let card = visibleCards.shift();
                     coveredCards.push(card);
                 }
+                coveredCards.forEach((card) => {
+                    card.isVisible=false;
+                    card.isAccessible=false;
+                }) 
+                return {
+                    ...state,
+                    mainDeck:{                    
+                        coveredCards,
+                        visibleCards,
+                        usedCards
+                    }   
+    
+                };
             }
             if (visibleCards.length>0){                
                 for (let i = 0; i<3 && visibleCards.length>0; i++){
@@ -73,10 +86,14 @@ const rootReducer = (state = defaultState, action) => {
                 }
             }
             for (let i = 0; i<3 && coveredCards.length>0; i++){
-                let card = coveredCards.pop();
+                let card = coveredCards.shift();
                 visibleCards.push(card);
             }
-            visibleCards[visibleCards.length-1].isAccessible = true;           
+            visibleCards[visibleCards.length-1].isAccessible = true; 
+            coveredCards.forEach((card) => {
+                card.isVisible=false;
+                card.isAccessible=false;
+            })          
             return {
                 ...state,
                 mainDeck:{                    
@@ -104,7 +121,9 @@ const rootReducer = (state = defaultState, action) => {
             foundations[action.foundationSuit].push(action.card);
             if (action.card.parentPile==='visibleCards'){
                 visibleCards.pop();
-                visibleCards[visibleCards.length-1].isAccessible = true;
+                if (visibleCards.length>0){
+                    visibleCards[visibleCards.length-1].isAccessible = true;
+                }
             }else{                
                 let pileNumber = parseInt(action.card.parentPile.slice(-1),10);  
                 piles[pileNumber-1].pop();  
@@ -121,8 +140,60 @@ const rootReducer = (state = defaultState, action) => {
             }
         }
         case 'ADD_CARD_TO_PILE':{
-            
-            return state;
+            let piles = state.piles.map((pile) => pile);
+            let pileNumber = parseInt(action.card.parentPile.slice(-1),10);
+            let coveredCards = state.mainDeck.coveredCards.map((card) => card);
+            let visibleCards = state.mainDeck.visibleCards.map((card) => card);
+            let usedCards = state.mainDeck.usedCards.map((card) => card); 
+            if ((piles[action.pileIndex].length===0) && action.card.rank===13){
+                piles[action.pileIndex].push(action.card);
+                if (action.card.linkedCards.length!==0){                   
+                    piles[action.pileIndex] = piles[action.pileIndex].concat(action.card.linkedCards);
+                }
+                if (action.card.parentPile==='visibleCards'){
+                    visibleCards.pop();
+                    visibleCards[visibleCards.length-1].isAccessible = true;
+                }else{
+                    piles[pileNumber-1].pop();
+                    let numOfLinkedCards = action.card.linkedCards.length;
+                    while(numOfLinkedCards>0){
+                        piles[pileNumber-1].pop();
+                        numOfLinkedCards--;
+                    }
+                }
+            }  
+            let lastCardInPile = piles[action.pileIndex][piles[action.pileIndex].length-1];
+            let targetCardcolor = lastCardInPile.suit === 'diamonds' || lastCardInPile.suit === 'hearts' ? 'red' : 'black';
+            let actionCardColor = action.card.suit === 'diamonds' || action.card.suit === 'hearts' ? 'red' : 'black';
+            if ((targetCardcolor!==actionCardColor) && 
+                (lastCardInPile.rank-1===action.card.rank)){
+                    piles[action.pileIndex].push(action.card);
+                    if (action.card.linkedCards.length!==0){                       
+                        piles[action.pileIndex] = piles[action.pileIndex].concat(action.card.linkedCards);
+                    }
+                    if (action.card.parentPile==='visibleCards'){
+                        visibleCards.pop();
+                        if (visibleCards.length>0){
+                            visibleCards[visibleCards.length-1].isAccessible = true;
+                        }
+                    }else{
+                        piles[pileNumber-1].pop();
+                        let numOfLinkedCards = action.card.linkedCards.length;
+                    while(numOfLinkedCards>0){
+                        piles[pileNumber-1].pop();
+                        numOfLinkedCards--;
+                    }
+                    }
+            }
+            return {
+                ...state,
+                piles,
+                mainDeck:{
+                    coveredCards,
+                    visibleCards,
+                    usedCards
+                }   
+            }
         }
         default:
             return state;

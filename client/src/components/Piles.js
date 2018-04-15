@@ -6,8 +6,7 @@ import '../App.css';
 const Piles = (props) => {
     
     return (
-        <div className="piles">
-            <h2>Piles</h2>
+        <div className="piles">           
             <Pile pileIndex='0'/>
             <Pile pileIndex='1'/>
             <Pile pileIndex='2'/>

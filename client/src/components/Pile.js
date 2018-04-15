@@ -22,7 +22,7 @@ class Pile extends Component {
                         card.isVisible = true;
                         card.isAccessible= true;
                     }
-                    let cardHeight = 10 * index;
+                    let cardHeight = 15 * index;
                     cardHeight +='px';
                     let cardStyle ={
                         position:'absolute',

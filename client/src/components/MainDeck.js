@@ -2,18 +2,30 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Card from './Card';
 import '../App.css';
+import {revealThreeCards} from '../actions/actionsCreators';
 
 const MainDeck = (props) => { 
-      return(
-            <div className="main_deck">
-                <fieldset/>          
+    // const myFunc = () => {
+    //     console.log(props);
+    // };    
+    const handleRevealCards = () => {
+        props.dispatch(revealThreeCards());   
+      }
+      const fieldSetDimensions = {
+        height:'113px',
+        width:'60px'
+    }
+    return(
+            <div className="main_deck">                                         
+                <fieldset onClick={handleRevealCards} style={fieldSetDimensions}/>
                 {props.coveredCards.map((card,index) => {
                     let cardToRightBy = 5 * index;
                     cardToRightBy +='px';
                     let cardStyle ={
                         position:'absolute',
+                        top:'-5px',
                         left:cardToRightBy                        
-                    }
+                    }                   
                     return (
                         <Card 
                             style={cardStyle}
@@ -21,11 +33,16 @@ const MainDeck = (props) => {
                             rank={card.rank} 
                             suit={card.suit} 
                             isVisible={card.isVisible} 
-                            isAccessible={card.isAccessible}/>
-                    )})}            
-                <p>visibleCards</p>               
+                            isAccessible={card.isAccessible}
+                            onClick={index===props.coveredCards.length-1 ? handleRevealCards : null }                           
+                            />
+                            
+                    )})} 
+                             
+                  
+                  <div className="visible_cards">
                 {props.visibleCards.map((card,index) => {
-                    let cardToRightBy = 5 * index;
+                    let cardToRightBy = 10 * index;
                     cardToRightBy +='px';
                     let cardStyle ={
                         position:'absolute',
@@ -41,16 +58,10 @@ const MainDeck = (props) => {
                             isVisible={card.isVisible} 
                             isAccessible={card.isAccessible}
                             parentPile='visibleCards'/>             
-                    )})}               
-                {/* <p>usedCards</p>
-                {props.usedCards.map((card) => {
-                    card.isVisible=false;
-                    return (
-                        <Card key={card.suit + card.rank} rank={card.rank} suit={card.suit} isVisible={card.isVisible} isAccessible={card.isAccessible}/>
-                    )
-                })} */}
-                
-            </div>
+                    )})}  
+                    </div> 
+                    
+                </div>
         )
     
 }

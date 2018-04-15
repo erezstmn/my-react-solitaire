@@ -11,18 +11,26 @@ class Foundation extends Component {
     render(){
         const fieldSetDimensions = {
             width:'60px',
-            height:'120px'
+            height:'118px'
 
         }
+        const cardStyle = {            
+                position:'absolute',
+                top:0,
+                left:'0px'          
+            
+        }       
         return this.props.connectDropTarget(
             <div className={this.props.name}>
                 <fieldset style={fieldSetDimensions}>{this.props.name}</fieldset>                
                 {this.props.foundations[this.props.name].map((card) => {
                     return (
                         <Card key={card.suit + card.rank} 
-                        rank={card.rank} suit={card.suit} 
+                        rank={card.rank} suit={card.suit}
+                        style={cardStyle} 
                         isVisible='true'
-                        isAccessible={card.isAccessible}/>                        
+                        isAccessible={card.isAccessible}
+                        parentPile={'foundation'}/>                        
                         
                     )
                 })} 

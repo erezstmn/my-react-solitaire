@@ -14,6 +14,7 @@ class Card extends Component{
             alt="" 
             width="90px" 
             style={this.props.style}
+            onClick={this.props.onClick}
             src={this.props.isVisible ? (require(`../Images/${cardNotation}.jpg`)) : require('../Images/Gray_back.jpg')}/>
         )
     }

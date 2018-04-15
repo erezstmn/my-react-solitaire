@@ -11,7 +11,7 @@ class Table extends Component {
     render() {
        
         return(
-            <div className="table">Table
+            <div className="table">
                 <Foundations />
                 <Piles />
                 <MainDeck />               

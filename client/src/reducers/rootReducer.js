@@ -10,7 +10,7 @@ const defaultState =
             coveredCards:[],
             visibleCards:[],
             usedCards:[]
-        }        
+        }      
     };
 
 const rootReducer = (state = defaultState, action) => {
@@ -47,7 +47,8 @@ const rootReducer = (state = defaultState, action) => {
                     coveredCards,
                     visibleCards:[],
                     usedCards:[]
-                }
+                }              
+
             };
         }        
         case 'REAVEAL_THREE_CARDS':{            
@@ -68,7 +69,7 @@ const rootReducer = (state = defaultState, action) => {
                 coveredCards.forEach((card) => {
                     card.isVisible=false;
                     card.isAccessible=false;
-                }) 
+                })                 
                 return {
                     ...state,
                     mainDeck:{                    
